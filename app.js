@@ -42,6 +42,17 @@ app.get('/:id', function(req, res) {
   })
 })
 
+app.delete('/deleteUser/:id', function(req, res){
+  fs.readFile(__dirname+"/"+"users.json", 'utf8', function(err,data) {
+    if(err) console.log("error reading file");
+    data = JSON.parse( data );
+    console.log("Deleted :"+data["user"+req.params.id]);
+    delete data["user"+req.params.id];
+    console.log(data);
+    res.end( JSON.stringify( data ));
+  })
+})
+
 
 
 app.listen(3000, function(err){
